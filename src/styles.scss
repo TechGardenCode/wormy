@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+@use "tailwindcss";
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-width: 320px;
+}
+
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+.btn {
+  @apply bg-slate-100 text-slate-800 p-4 rounded;
+
+  &-circle {
+    @apply rounded-full;
+  }
+
+  &:hover {
+    @apply cursor-pointer brightness-[1.10];
+  }
+
+  &:active {
+    @apply brightness-[0.90];
+  }
+}
+
+.dark\:btn {
+  background-color: var(--color-slate-800);
+  color: var(--color-slate-100);
+}

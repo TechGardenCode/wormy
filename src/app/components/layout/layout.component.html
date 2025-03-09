@@ -1,0 +1,107 @@
+<div
+  class="fixed h-full top-0 left-0 w-64 flex flex-col bg-white dark:bg-slate-800"
+>
+  <div class="pt-10 pb-8 flex justify-center items-center">
+    <a class="text-2xl tracking-widest flex items-center" routerLink="/">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
+        />
+      </svg>
+      <div class="ml-1">
+        WORMY
+      </div>
+    </a>
+  </div>
+  <div class="overflow-y-auto pb-8">
+    <div class="" *ngFor="let navItem of navItems">
+      <div class="px-8 py-4 font-semibold text-sm text-blue-400">
+        {{ navItem.group | uppercase }}
+      </div>
+      <ul class="">
+        <li *ngFor="let item of navItem.items">
+          @if(item.items && item.items.length) {
+          <a
+            class="flex bg-slate-100 dark:bg-slate-800 hover:brightness-[1.10] active:brightness-[0.9] cursor-pointer justify-between px-8 py-3"
+            (click)="item.showItems = !item.showItems"
+          >
+            <div>{{ item.title }}</div>
+            @if (item.showItems) {
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m4.5 15.75 7.5-7.5 7.5 7.5"
+              />
+            </svg>
+            } @else {
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m19.5 8.25-7.5 7.5-7.5-7.5"
+              />
+            </svg>
+            }
+          </a>
+          <ul *ngIf="item.showItems">
+            <li *ngFor="let subItem of item.items">
+              <a
+                class="flex px-12 py-3 bg-slate-100 dark:bg-slate-800 hover:brightness-[1.10] active:brightness-[0.9]"
+                [routerLink]="['/', navItem.link, item.link, subItem.link]"
+                routerLinkActive="font-extrabold"
+                >{{ subItem.title }}</a
+              >
+            </li>
+          </ul>
+          } @else {
+          <a
+            class="flex px-8 py-3 bg-slate-100 dark:bg-slate-800 hover:brightness-[1.10] active:brightness-[0.9]"
+            [routerLink]="['/', navItem.link, item.link]"
+            routerLinkActive="font-extrabold"
+            >{{ item.title }}</a
+          >
+          }
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="grow-1 flex flex-col p-8 ml-64">
+  <div class="mb-8 flex justify-between items-center">
+    <div class="flex items-center gap-4">
+      <!-- <button class="btn btn-circle dark:btn"></button> -->
+      <p class="text-lg">Dashboard</p>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <input sproutInput type="text" placeholder="Search..." />
+      <button sproutButton variant="icon"></button>
+      <button sproutButton variant="icon"></button>
+    </div>
+  </div>
+  <ng-content></ng-content>
+</div>
