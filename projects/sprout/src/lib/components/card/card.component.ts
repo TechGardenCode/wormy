@@ -15,10 +15,10 @@ import {
 })
 export class SproutCard {
   @HostBinding('class')
-  get classList(): string {
+  get classes(): string {
     const light =
-      'bg-slate-100 text-slate-800 p-8 rounded shadow-md border border-slate-200';
-    const dark = 'bg-slate-800 text-slate-100 border-slate-700'
+      'bg-white text-slate-800 p-8 rounded border border-slate-200';
+    const dark = 'bg-slate-800 text-white border-slate-700'
       .split(' ')
       .map((v) => `dark:${v}`)
       .join(' ');

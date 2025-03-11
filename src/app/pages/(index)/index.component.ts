@@ -18,8 +18,6 @@ import { RouterOutlet } from '@angular/router';
 export class IndexComponent {
   count = signal(0);
 
-  constructor() {}
-
   increment() {
     this.count.update((count) => count + 1);
   }

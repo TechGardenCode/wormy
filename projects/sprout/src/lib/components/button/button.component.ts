@@ -4,21 +4,30 @@ import { Directive, HostBinding, Input } from '@angular/core';
   selector: 'button[sproutButton]',
 })
 export class SproutButton {
-  @Input() variant: 'primary' | 'secondary' | 'icon' = 'primary';
+  @Input() variant: 'text' | 'icon' = 'text';
+  @Input() btnStyle: 'primary' | 'secondary' | 'outline' = 'primary';
 
   @HostBinding('class')
-  get classList(): string {
-    const base = ['cursor-pointer hover:brightness-[1.10] active:brightness-[0.9]'];
+  get classes(): string {
+    const base = [
+      'cursor-pointer border hover:brightness-[0.95] active:brightness-[0.9]',
+    ];
     if (this.variant === 'icon') {
       base.push('p-4', 'rounded-full');
     } else {
       base.push('px-4', 'py-2', 'rounded', 'border');
     }
-    const light = 'bg-slate-100 text-slate-800 border-slate-200';
-    const dark = 'bg-slate-800 text-slate-100 border-slate-700'
+    const light: string[] = [];
+    if (this.btnStyle === 'primary') {
+      light.push('bg-blue-500', 'text-white', 'border-blue-600');
+    }
+    if (this.btnStyle === 'secondary') {
+      light.push('bg-white', 'text-slate-800', 'border-slate-200');
+    }
+    const dark = 'bg-slate-800 text-white border-slate-700'
       .split(' ')
       .map((v) => `dark:${v}`)
       .join(' ');
-    return [...base, light, dark].join(' ');
+    return [...base, ...light, dark].join(' ');
   }
 }

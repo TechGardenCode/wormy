@@ -2,6 +2,10 @@ import { Routes } from '@angular/router';
 import { ECommerceComponent } from './pages/dashboard/e-commerce/e-commerce.component';
 import { IndexComponent } from './pages/(index)/index.component';
 import { NotImplementedComponent } from './pages/not-implemented/not-implemented.component';
+import { BankingComponent } from './pages/dashboard/banking/banking.component';
+import { BlogListComponent } from './pages/apps/blog/list/list.component';
+import { ChatComponent } from './pages/apps/chat/chat.component';
+import { FilesComponent } from './pages/apps/files/files.component';
 
 export const routes: Routes = [
   {
@@ -11,14 +15,16 @@ export const routes: Routes = [
       {
         path: 'dashboard/e-commerce',
         component: ECommerceComponent,
+        title: 'E-Commerce',
       },
       {
         path: 'dashboard/banking',
-        component: NotImplementedComponent,
+        component: BankingComponent,
+        title: 'Banking',
       },
       {
         path: 'apps/blog/list',
-        component: NotImplementedComponent,
+        component: BlogListComponent,
       },
       {
         path: 'apps/blog/detail',
@@ -30,11 +36,11 @@ export const routes: Routes = [
       },
       {
         path: 'apps/chat',
-        component: NotImplementedComponent,
+        component: ChatComponent,
       },
       {
         path: 'apps/files',
-        component: NotImplementedComponent,
+        component: FilesComponent,
       },
       {
         path: 'apps/kanban',

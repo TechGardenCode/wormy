@@ -1,0 +1,152 @@
+<div class="flex flex-col md:flex-row gap-8 h-[calc(100vh-8rem-2px)]">
+  <div
+    class="w-full md:w-[25rem] bg-white border border-slate-200 dark:bg-slate-800 dark:border-slate-700 dark:text-white rounded text-slate-800 flex flex-col"
+  >
+    <div class="flex flex-col items-center gap-4 p-12">
+      <sprout-avatar
+        size="lg"
+        class="bg-white text-slate-800 border-slate-200 shadow w-24 h-24"
+        monogram="AA"
+      ></sprout-avatar>
+      <div class="text-2xl font-medium">Andrew Andrewson</div>
+    </div>
+    <hr class="border-slate-200 dark:border-slate-700" />
+    <div
+      class="w-full flex flex-grow gap-y-6 flex-col border-slate-200 dark:border-slate-700 p-6 overflow-auto"
+    >
+      <input sproutInput placeholder="Search" />
+      <div class="flex flex-row gap-6 md:flex-col overflow-auto">
+        <div
+          class="flex-shrink-0"
+          *ngFor="let contact of contacts; index as index"
+        >
+          <div
+            class="flex flex-nowrap justify-between items-center border border-slate-200 dark:border-slate-700 rounded p-4 cursor-pointer select-none hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-150"
+            (click)="selectContact(index)"
+          >
+            <div class="flex items-center flex-shrink-0">
+              <sprout-avatar
+                [monogram]="splitName(contact.name)"
+                class="bg-white text-slate-800 border-slate-200 border md:mr-4"
+                [imageUrl]="contact.imageUrl"
+                size="lg"
+              ></sprout-avatar>
+              <div class="flex-col hidden md:flex">
+                <div class="text-slate-900 dark:text-slate-50 font-semibold">
+                  {{ contact.name }}
+                </div>
+                <div
+                  class="text-slate-600 dark:text-slate-200 text-ellipsis overflow-hidden whitespace-nowrap w-40 text-sm"
+                >
+                  {{ contact.note }}
+                </div>
+              </div>
+            </div>
+            <span
+              class="text-slate-700 dark:text-slate-100 font-semibold hidden xl:inline"
+            >
+              {{ getRelativeTime(contact.lastMessageTs) }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="bg-white border border-slate-200 dark:bg-slate-800 dark:border-slate-700 dark:text-white rounded text-slate-800 flex flex-col grow-1"
+  >
+    <div
+      class="flex flex-nowrap justify-between items-center rounded p-4 lg:p-12"
+    >
+      <div class="flex items-center flex-shrink-0">
+        <sprout-avatar
+          [monogram]="splitName(contacts[selectedContact].name)"
+          class="bg-white text-slate-800 border-slate-200 border md:mr-4"
+          [imageUrl]="contacts[selectedContact].imageUrl"
+          size="xl"
+        ></sprout-avatar>
+        <div class="flex-col hidden md:flex">
+          <div class="text-slate-900 dark:text-slate-50 font-semibold">
+            {{ contacts[selectedContact].name }}
+          </div>
+          <div
+            class="text-slate-600 dark:text-slate-200 text-ellipsis overflow-hidden whitespace-nowrap text-sm"
+          >
+            {{
+              "Last seen: " +
+                getRelativeTime(contacts[selectedContact].lastActiveTs)
+            }}
+          </div>
+        </div>
+      </div>
+      <span
+        class="text-slate-700 dark:text-slate-100 font-semibold hidden md:inline"
+      >
+        {{ getRelativeTime(contacts[selectedContact].lastMessageTs) }}
+      </span>
+    </div>
+    <hr class="border-slate-200 dark:border-slate-700" />
+    <div class="p-4 md:px-6 lg:px-12 lg:py-6 overflow-y-auto" id="chatMessages">
+      <div
+        class="flex gap-4"
+        *ngFor="let message of dummyMessages; index as index"
+        [ngClass]="{
+          'mt-4':
+            index === 0 || dummyMessages[index - 1].sender !== message.sender
+        }"
+      >
+        <div
+          *ngIf="
+            index === 0 || dummyMessages[index - 1].sender !== message.sender
+          "
+        >
+          @if(message.sender === 'self') {
+          <sprout-avatar
+            [monogram]="splitName('Andrew Andrewson')"
+            class="bg-white text-slate-800 border-slate-200 border"
+            size="lg"
+          ></sprout-avatar>
+          } @else {
+          <sprout-avatar
+            [monogram]="splitName(contacts[selectedContact].name)"
+            class="bg-white text-slate-800 border-slate-200 border"
+            [imageUrl]="contacts[selectedContact].imageUrl"
+            size="lg"
+          ></sprout-avatar>
+          }
+        </div>
+        <div
+          class="flex flex-col"
+          [ngClass]="{
+            'ml-16':
+              index !== 0 && dummyMessages[index - 1].sender === message.sender
+          }"
+        >
+          <div
+            class="flex gap-2"
+            *ngIf="
+              index === 0 || dummyMessages[index - 1].sender !== message.sender
+            "
+          >
+            <div class="font-semibold">
+              {{
+                message.sender === "self"
+                  ? "Andrew Andrewson"
+                  : contacts[selectedContact].name
+              }}
+            </div>
+            <div class="hidden xl:inline">
+              {{ getMessageTime(message.timestamp) }}
+            </div>
+          </div>
+          <div>{{ message.message }}</div>
+        </div>
+      </div>
+    </div>
+    <hr class="border-slate-200 dark:border-slate-700" />
+    <div class="p-8 flex gap-4">
+      <input class="grow-1" sproutInput placeholder="Type a message" />
+      <button sproutButton>Send</button>
+    </div>
+  </div>
+</div>

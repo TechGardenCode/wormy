@@ -1,5 +1,5 @@
 <div
-  class="fixed h-full top-0 left-0 w-64 flex flex-col bg-white dark:bg-slate-800"
+  class="layout-sidenav fixed h-full top-0 left-0 w-64 flex flex-col bg-white dark:bg-slate-800 z-100 transition-transform duration-300 ease-in-out"
 >
   <div class="pt-10 pb-8 flex justify-center items-center">
     <a class="text-2xl tracking-widest flex items-center" routerLink="/">
@@ -17,9 +17,7 @@
           d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
         />
       </svg>
-      <div class="ml-1">
-        WORMY
-      </div>
+      <div class="ml-1">WORMY</div>
     </a>
   </div>
   <div class="overflow-y-auto pb-8">
@@ -31,7 +29,7 @@
         <li *ngFor="let item of navItem.items">
           @if(item.items && item.items.length) {
           <a
-            class="flex bg-slate-100 dark:bg-slate-800 hover:brightness-[1.10] active:brightness-[0.9] cursor-pointer justify-between px-8 py-3"
+            class="flex bg-white dark:bg-slate-800 hover:brightness-[0.95] active:brightness-[0.9] cursor-pointer justify-between px-8 py-3"
             (click)="item.showItems = !item.showItems"
           >
             <div>{{ item.title }}</div>
@@ -70,7 +68,7 @@
           <ul *ngIf="item.showItems">
             <li *ngFor="let subItem of item.items">
               <a
-                class="flex px-12 py-3 bg-slate-100 dark:bg-slate-800 hover:brightness-[1.10] active:brightness-[0.9]"
+                class="flex px-12 py-3 bg-white dark:bg-slate-800 hover:brightness-[0.95] active:brightness-[0.9]"
                 [routerLink]="['/', navItem.link, item.link, subItem.link]"
                 routerLinkActive="font-extrabold"
                 >{{ subItem.title }}</a
@@ -79,7 +77,7 @@
           </ul>
           } @else {
           <a
-            class="flex px-8 py-3 bg-slate-100 dark:bg-slate-800 hover:brightness-[1.10] active:brightness-[0.9]"
+            class="flex px-8 py-3 bg-white dark:bg-slate-800 hover:brightness-[0.95] active:brightness-[0.9]"
             [routerLink]="['/', navItem.link, item.link]"
             routerLinkActive="font-extrabold"
             >{{ item.title }}</a
@@ -90,18 +88,42 @@
     </div>
   </div>
 </div>
-<div class="grow-1 flex flex-col p-8 ml-64">
+<div class="w-full grow-1 flex flex-col p-4 md:p-8 ml-0 lg:ml-64">
   <div class="mb-8 flex justify-between items-center">
     <div class="flex items-center gap-4">
-      <!-- <button class="btn btn-circle dark:btn"></button> -->
-      <p class="text-lg">Dashboard</p>
+      <button
+        class="relative"
+        sproutButton
+        variant="icon"
+        btnStyle="secondary"
+        (click)="toggleSidebar()"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-4 absolute top-1/2 -translate-1/2 left-1/2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+          />
+        </svg>
+      </button>
+      <p class="hidden md:block text-lg">{{ title }}</p>
     </div>
 
     <div class="flex items-center gap-4">
       <input sproutInput type="text" placeholder="Search..." />
-      <button sproutButton variant="icon"></button>
-      <button sproutButton variant="icon"></button>
+      <button sproutButton variant="icon" btnStyle="secondary"></button>
+      <button sproutButton variant="icon" btnStyle="primary" class="relative">
+        <sprout-avatar class="inline" monogram="AA"></sprout-avatar>
+      </button>
     </div>
   </div>
   <ng-content></ng-content>
 </div>
+<div class="layout-mobile-backdrop" (click)="toggleSidebar()"></div>

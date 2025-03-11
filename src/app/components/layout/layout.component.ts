@@ -1,19 +1,30 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, HostBinding, HostListener, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { SproutButton, SproutInput } from '../../../../projects/sprout/src/public-api';
+import {
+  SproutAvatar,
+  SproutButton,
+  SproutInput,
+} from '../../../../projects/sprout/src/public-api';
+import { LayoutService } from '../../services/layout.service';
 
 @Component({
   selector: 'app-layout',
-  imports: [CommonModule, RouterModule, SproutInput, SproutButton],
+  imports: [
+    CommonModule,
+    RouterModule,
+    SproutInput,
+    SproutButton,
+    SproutAvatar,
+  ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
   encapsulation: ViewEncapsulation.None,
-  host: {
-    class: 'layout-container',
-  },
 })
 export class LayoutComponent {
+  isSidebarOpen = false;
+  title: string = '';
+
   navItems = [
     {
       group: 'Dashboards',
@@ -153,5 +164,26 @@ export class LayoutComponent {
     },
   ];
 
-  constructor() {}
+  @HostBinding('class')
+  get class() {
+    const base = ['layout-container'];
+    if (this.isSidebarOpen) {
+      base.push('layout-mobile-active');
+    }
+    return base.join(' ');
+  }
+
+  constructor(private readonly layoutService: LayoutService) {
+    this.layoutService.title$.subscribe((title) => {
+      this.title = title;
+    });
+
+    this.layoutService.isSidebarOpen$.subscribe((isSidebarOpen) => {
+      this.isSidebarOpen = isSidebarOpen;
+    });
+  }
+
+  toggleSidebar() {
+    this.layoutService.toggleSidebar();
+  }
 }
