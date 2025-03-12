@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
   selector: 'sprout-progress',
   imports: [CommonModule],
   templateUrl: './progress.component.html',
-  styleUrl: './progress.component.scss'
+  styleUrl: './progress.component.css'
 })
 export class SproutProgress {
   @Input() progress: number = 0;

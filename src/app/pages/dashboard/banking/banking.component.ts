@@ -8,7 +8,7 @@ import { SproutCard } from "../../../../../projects/sprout/src/lib/components/ca
   selector: 'app-banking',
   imports: [CommonModule, SproutAvatar, SproutButton, SproutCard],
   templateUrl: './banking.component.html',
-  styleUrl: './banking.component.scss'
+  styleUrl: './banking.component.css'
 })
 export class BankingComponent {
   constructor(private readonly layoutService: LayoutService) {

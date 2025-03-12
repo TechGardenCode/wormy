@@ -5,7 +5,7 @@ import { SproutCard, SproutProgress } from '../../../../../projects/sprout/src/p
   selector: 'app-files',
   imports: [SproutCard, SproutProgress],
   templateUrl: './files.component.html',
-  styleUrl: './files.component.scss'
+  styleUrl: './files.component.css'
 })
 export class FilesComponent {
 

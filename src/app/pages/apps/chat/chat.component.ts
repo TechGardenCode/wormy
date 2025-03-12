@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-chat',
   imports: [CommonModule, SproutButton, SproutAvatar, SproutInput],
   templateUrl: './chat.component.html',
-  styleUrl: './chat.component.scss',
+  styleUrl: './chat.component.css',
 })
 export class ChatComponent implements AfterViewInit {
   today = new Date();

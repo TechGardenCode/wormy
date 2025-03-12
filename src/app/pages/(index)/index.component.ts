@@ -11,7 +11,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-index',
   imports: [RouterOutlet, LayoutModule],
   templateUrl: './index.component.html',
-  styleUrl: './index.component.scss',
+  styleUrl: './index.component.css',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

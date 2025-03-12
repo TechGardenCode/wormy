@@ -9,7 +9,7 @@ import {
   selector: 'sprout-card',
   imports: [],
   templateUrl: './card.component.html',
-  styleUrl: './card.component.scss',
+  styleUrl: './card.component.css',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

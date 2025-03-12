@@ -6,7 +6,7 @@ import { LayoutService } from '../../../services/layout.service';
   selector: 'app-e-commerce',
   imports: [SproutCard],
   templateUrl: './e-commerce.component.html',
-  styleUrl: './e-commerce.component.scss'
+  styleUrl: './e-commerce.component.css'
 })
 export class ECommerceComponent {
   constructor(private readonly layoutService: LayoutService) {

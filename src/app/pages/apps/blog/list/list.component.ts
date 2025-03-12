@@ -7,7 +7,7 @@ import { LayoutService } from '../../../../services/layout.service';
   selector: 'app-list',
   imports: [CommonModule, SproutCard],
   templateUrl: './list.component.html',
-  styleUrl: './list.component.scss',
+  styleUrl: './list.component.css',
 })
 export class BlogListComponent {
   today = new Date();

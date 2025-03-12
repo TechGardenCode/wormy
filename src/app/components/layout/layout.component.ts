@@ -18,7 +18,7 @@ import { LayoutService } from '../../services/layout.service';
     SproutAvatar,
   ],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.scss',
+  styleUrl: './layout.component.css',
   encapsulation: ViewEncapsulation.None,
 })
 export class LayoutComponent {

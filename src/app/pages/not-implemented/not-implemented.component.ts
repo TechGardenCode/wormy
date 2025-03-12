@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-not-implemented',
   imports: [],
   templateUrl: './not-implemented.component.html',
-  styleUrl: './not-implemented.component.scss'
+  styleUrl: './not-implemented.component.css'
 })
 export class NotImplementedComponent {
 

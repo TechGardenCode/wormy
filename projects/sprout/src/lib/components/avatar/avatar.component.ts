@@ -11,7 +11,7 @@ import {
   selector: 'sprout-avatar',
   imports: [CommonModule],
   templateUrl: './avatar.component.html',
-  styleUrl: './avatar.component.scss',
+  styleUrl: './avatar.component.css',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
